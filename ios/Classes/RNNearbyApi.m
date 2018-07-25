@@ -231,10 +231,11 @@ RCT_EXPORT_METHOD(subscribe) {
         } messageLostHandler:^(GNSMessage *message) {
             [welf sendEvent:MESSAGE_LOST withMessage:message];
         } paramsBlock:^(GNSSubscriptionParams *params) {
-            params.strategy = [GNSStrategy strategyWithParamsBlock:^(GNSStrategyParams *params) {
+            params.deviceTypesToDiscover = kGNSDeviceBLEBeacon; //TODO: Make this configurable
+            /*params.strategy = [GNSStrategy strategyWithParamsBlock:^(GNSStrategyParams *params) {
                 params.allowInBackground = false; //TODO: Make this configurable
                 params.discoveryMediums = _isBLEOnly ? kGNSDiscoveryMediumsBLE : kGNSDiscoveryModeDefault;
-            }];
+            }];*/
         }];
         [self sendEvent:SUBSCRIBE_SUCCESS withString:@"Successfully Subscribed."];
     } @catch(NSException *exception) {
