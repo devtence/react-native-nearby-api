@@ -232,6 +232,9 @@ RCT_EXPORT_METHOD(subscribe) {
             [welf sendEvent:MESSAGE_LOST withMessage:message];
         } paramsBlock:^(GNSSubscriptionParams *params) {
             params.deviceTypesToDiscover = kGNSDeviceBLEBeacon; //TODO: Make this configurable
+            params.beaconStrategy = [GNSBeaconStrategy strategyWithParamsBlock:^(GNSBeaconStrategyParams *params) {
+                                    params.allowInBackground = YES;
+                                  }];
             /*params.strategy = [GNSStrategy strategyWithParamsBlock:^(GNSStrategyParams *params) {
                 params.allowInBackground = false; //TODO: Make this configurable
                 params.discoveryMediums = _isBLEOnly ? kGNSDiscoveryMediumsBLE : kGNSDiscoveryModeDefault;
