@@ -358,7 +358,9 @@ public class RNNearbyApiModule extends ReactContextBaseJavaModule implements Lif
     public void onHostPause() {
         Log.i(getName(), "onHostPause");
         unpublish();
-        unsubscribe();
+        //NOTE: this was commented because we don't want to stop listening/scanning
+        //for NearBy devices when the app is in background
+        //unsubscribe();
     }
 
     @Override
